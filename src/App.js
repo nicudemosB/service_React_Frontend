@@ -39,7 +39,8 @@ const App = () => {
     {
       make: newMake,
       model: newModel,
-      year: newYear
+      year: newYear,
+      needService: newServiceChange
       
       }
     ).then(() => {
@@ -64,6 +65,21 @@ const App = () => {
       })
     })
   }
+
+  const handleToggleNeedService = (serviceData) => {
+    // console.log(serviceData);
+    axios.put(`http://localhost:3000/service/${serviceData._id}`,
+      {
+        make: serviceData.make,
+      
+        needService: !serviceData.needService
+      }
+    ).then(() => {
+      axios.get('http://localhost:3000/service').then((response) => {
+        setService(response.data)
+      })
+    })
+  }
   return (
     <main>
       <h1>Car Maintenance</h1>
@@ -82,10 +98,15 @@ const App = () => {
         <ul>
           {
             service.map((service) => {
-              return <li key={service._id}>
+              return <li 
+              key={service._id}
+              onClick = {(event) => {
+                handleToggleNeedService(service)
+              }}
+              >
                 {
                 
-                (service.ServiceChange)?
+                service.needService ?
                 <strike>{service.make}</strike>
                 :
                 service.make
