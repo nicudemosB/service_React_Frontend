@@ -1,14 +1,13 @@
-import logo from './logo.svg';
 import './App.css';
 import {useState, useEffect} from 'react'
 import axios from 'axios'
 
 const App = () => {
   return (
-    <main>
+    <main className="App">
       <h1>Car Maintenance</h1>
       <section>
-        <h2>List of vehicles due for service</h2>
+        <h2>List of vehicles due for service:</h2>
         <form>
           Make: <input type='text'/><br/>
           Model: <input type='text'/><br/>
