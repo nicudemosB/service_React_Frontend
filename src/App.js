@@ -8,6 +8,7 @@ const App = () => {
   const [newModel, setModel] = useState('')
   const [newServiceChange, setServiceChange] = useState(false)
   const [newYear, setYear] = useState(1980)
+  const [service, setService] = useState([])
 
   const handleNewMakeChange = (event) => {
     // console.log(event.target.value);
@@ -25,7 +26,9 @@ const App = () => {
   }
   
   const handleNewServiceChange = (event) => {
-    console.log(event.target.checked);
+    // console.log(event.target.checked);
+    setServiceChange(event.target.checked)
+    
   }
 
   const handleNewListFormSubmit = (event) => {
@@ -38,6 +41,27 @@ const App = () => {
       model: newModel,
       year: newYear
       
+      }
+    ).then(() => {
+      axios.get('http://localhost:3000/service').then((response) => {
+        setService(response.data)
+      })
+    })
+  }
+
+  useEffect(() => {
+    axios.get('http://localhost:3000/service').then((response) => {
+      // console.log(response.data);
+      setService(response.data)
+    })
+  }, [])
+
+  const handleDelete = (serviceData) => {
+    // console.log(serviceData);
+    axios.delete(`http://localhost:3000/service/${serviceData._id}`).then(() => {
+      axios.get('http://localhost:3000/service').then((response) => {
+        setService(response.data)
+      })
     })
   }
   return (
@@ -52,6 +76,28 @@ const App = () => {
           Needs Service <input type='checkbox' onChange={handleNewServiceChange} /><br/>
           <input type='submit' value='Send vehicle for maintenance'></input>
         </form>
+      </section>
+      <section>
+        <h2>Service</h2>
+        <ul>
+          {
+            service.map((service) => {
+              return <li key={service._id}>
+                {
+                
+                (service.ServiceChange)?
+                <strike>{service.make}</strike>
+                :
+                service.make
+                
+                }
+                <button onClick={(event) => {
+                   handleDelete(service)
+                }}>Delete</button>
+              </li>
+            })
+          }
+        </ul>
       </section>
     </main>
   );
