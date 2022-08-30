@@ -81,7 +81,7 @@ const App = () => {
     })
   }
   return (
-    <main>
+    <main className="App">
       <h1>Car Maintenance</h1>
       <section>
         <h2>List of vehicles due for service</h2>
