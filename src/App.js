@@ -1,6 +1,8 @@
 import './App.css';
 import {useState, useEffect} from 'react'
 import axios from 'axios'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button } from "reactstrap"
 
 const App = () => {
 
@@ -98,7 +100,7 @@ const handleDelete = (serviceData) => {
           Model: <input type='text' onChange={handleNewModelChange} /><br/>
           Year: <input type='number' onChange={handleNewYearChange} /><br/>
           Needs Service <input type='checkbox' onChange={handleNewServiceChange} /><br/>
-          <input type='submit' value='Send vehicle for maintenance'></input>
+          <input className='btn btn-warning' type='submit' value='Send vehicle for maintenance'></input>
         </form>
       </section>
       <section>
@@ -126,9 +128,9 @@ const handleDelete = (serviceData) => {
                 {"     "}
                 {service.year}
                 {"     "}
-                <button onClick={(event) => {
+                <Button color="danger" onClick={(event) => {
                    handleDelete(service)
-                }}>Delete</button>
+                }}>Delete</Button>
               </ul>)
             })
           }

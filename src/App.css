@@ -1,5 +1,5 @@
 .App {
-  background-image: url(/public/images/check_engine.jpg);
+  
   background-size: cover;
   background-repeat: repeat;
   text-align: center;
@@ -8,4 +8,16 @@
   color: white;
   height: 100%;
 }
-
+body {
+  background: url(/public/images/check_engine.jpg) no-repeat center fixed;
+  
+}
+h2 {
+  font-family: 'Bebas Neue', cursive;
+}
+h1 {
+  font-family: 'Bebas Neue', cursive;
+}
+input {
+  
+}
