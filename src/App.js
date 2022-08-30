@@ -52,13 +52,6 @@ const App = () => {
     })
   }
 
-  useEffect(() => {
-    axios.get('http://localhost:3000/service').then((response) => {
-      // console.log(response.data);
-      setService(response.data)
-    })
-  }, [])
-
   const handleDelete = (serviceData) => {
     // console.log(serviceData);
     axios.delete(`http://localhost:3000/service/${serviceData._id}`).then(() => {
@@ -82,6 +75,15 @@ const App = () => {
       })
     })
   }
+
+//___________________________________________________________________
+
+useEffect(() => {
+  axios.get('http://localhost:3000/service').then((response) => {
+    // console.log(response.data);
+    setService(response.data)
+  })
+}, [])
 
 //___________________________________________________________________
 
