@@ -33,29 +33,25 @@ const App = () => {
 
   //___________________________________________________________________
 
-  const handleNewListFormSubmit = (event) => {
+  useEffect(() => {
+    axios.get('https://young-anchorage-04692.herokuapp.com/service').then((response) => {
+      setService(response.data)
+    })
+  }, [])
+
+    const handleNewListFormSubmit = (event) => {
     event.preventDefault()
     // console.log(newMake);
     // console.log(newServiceChange);
-    axios.post('http://localhost:3000/service',
+    axios.post('https://young-anchorage-04692.herokuapp.com/service',
     {
       make: newMake,
       model: newModel,
       year: newYear,
       needService: newServiceChange
-      
-      }
+    }
     ).then(() => {
-      axios.get('http://localhost:3000/service').then((response) => {
-        setService(response.data)
-      })
-    })
-  }
-
-  const handleDelete = (serviceData) => {
-    // console.log(serviceData);
-    axios.delete(`http://localhost:3000/service/${serviceData._id}`).then(() => {
-      axios.get('http://localhost:3000/service').then((response) => {
+      axios.get('https://young-anchorage-04692.herokuapp.com/service').then((response) => {
         setService(response.data)
       })
     })
@@ -63,14 +59,14 @@ const App = () => {
 
   const handleToggleNeedService = (serviceData) => {
     // console.log(serviceData);
-    axios.put(`http://localhost:3000/service/${serviceData._id}`,
+    axios.put(`https://young-anchorage-04692.herokuapp.com/service/${serviceData._id}`,
       {
         make: serviceData.make,
       
         needService: !serviceData.needService
       }
     ).then(() => {
-      axios.get('http://localhost:3000/service').then((response) => {
+      axios.get('https://young-anchorage-04692.herokuapp.com/service').then((response) => {
         setService(response.data)
       })
     })
@@ -78,12 +74,14 @@ const App = () => {
 
 //___________________________________________________________________
 
-useEffect(() => {
-  axios.get('http://localhost:3000/service').then((response) => {
-    // console.log(response.data);
-    setService(response.data)
+const handleDelete = (serviceData) => {
+  // console.log(serviceData);
+  axios.delete(`https://young-anchorage-04692.herokuapp.com/service/${serviceData._id}`).then(() => {
+    axios.get('https://young-anchorage-04692.herokuapp.com/service').then((response) => {
+      setService(response.data)
+    })
   })
-}, [])
+}
 
 //___________________________________________________________________
 
@@ -105,24 +103,25 @@ useEffect(() => {
         <ul>
           {
             service.map((service) => {
-              return <li 
+              return (
+              <li 
               key={service._id}
-              onClick = {(event) => {
-                handleToggleNeedService(service)
-              }}
-              >
-                {
+              // onClick = {(event) => {
+              //   handleToggleNeedService(service)
+              // }}
+              > {service.make}
+                {/* {
                 
                 service.needService ?
                 <strike>{service.make}</strike>
                 :
                 service.make
                 
-                }
-                <button onClick={(event) => {
+                } */}
+                {/* <button onClick={(event) => {
                    handleDelete(service)
-                }}>Delete</button>
-              </li>
+                }}>Delete</button> */}
+              </li>)
             })
           }
         </ul>
