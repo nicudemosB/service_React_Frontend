@@ -65,9 +65,11 @@ const App = () => {
       
         needService: !serviceData.needService
       }
-    ).then(() => {
-      axios.get('https://young-anchorage-04692.herokuapp.com/service').then((response) => {
-        setService(response.data)
+    )
+    .then(() => {
+      axios.get('https://young-anchorage-04692.herokuapp.com/service')
+        .then((response) => {
+          setService(response.data)
       })
     })
   }
@@ -106,21 +108,21 @@ const handleDelete = (serviceData) => {
               return (
               <li 
               key={service._id}
-              // onClick = {(event) => {
-              //   handleToggleNeedService(service)
-              // }}
-              > {service.make}
-                {/* {
+              onClick = {(event) => {
+                handleToggleNeedService(service)
+              }}
+              > 
+                {
                 
                 service.needService ?
                 <strike>{service.make}</strike>
                 :
                 service.make
                 
-                } */}
-                {/* <button onClick={(event) => {
+                }
+                <button onClick={(event) => {
                    handleDelete(service)
-                }}>Delete</button> */}
+                }}>Delete</button>
               </li>)
             })
           }
