@@ -6,7 +6,7 @@ const App = () => {
 
   const [newMake, setMake] = useState('')
   const [newModel, setModel] = useState('')
-  const [newServiceChange, setServiceChange] = useState(false)
+  const [newServiceChange, setServiceChange] = useState(true)
   const [newYear, setYear] = useState(1980)
   const [service, setService] = useState([])
 
@@ -79,7 +79,8 @@ const App = () => {
 const handleDelete = (serviceData) => {
   // console.log(serviceData);
   axios.delete(`https://young-anchorage-04692.herokuapp.com/service/${serviceData._id}`).then(() => {
-    axios.get('https://young-anchorage-04692.herokuapp.com/service').then((response) => {
+    axios.get('https://young-anchorage-04692.herokuapp.com/service')
+    .then((response) => {
       setService(response.data)
     })
   })
