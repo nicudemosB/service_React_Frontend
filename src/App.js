@@ -10,12 +10,13 @@ const App = () => {
   const [newYear, setYear] = useState(1980)
   const [service, setService] = useState([])
 
+//___________________________________________________________________
+
   const handleNewMakeChange = (event) => {
     // console.log(event.target.value);
     setMake(event.target.value)
   }
 
-  
   const handleNewModelChange = (event) => {
     // console.log(event.target.value);
     setModel(event.target.value)
@@ -28,8 +29,9 @@ const App = () => {
   const handleNewServiceChange = (event) => {
     // console.log(event.target.checked);
     setServiceChange(event.target.checked)
-    
   }
+
+  //___________________________________________________________________
 
   const handleNewListFormSubmit = (event) => {
     event.preventDefault()
@@ -80,6 +82,9 @@ const App = () => {
       })
     })
   }
+
+//___________________________________________________________________
+
   return (
     <main className="App">
       <h1>Car Maintenance</h1>
