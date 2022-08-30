@@ -67,7 +67,7 @@ const App = () => {
       }
     )
     .then(() => {
-      axios.get('http://localhost:3000/service')
+      axios.get('https://young-anchorage-04692.herokuapp.com/service')
         .then((response) => {
           setService(response.data)
       })
@@ -111,7 +111,7 @@ const handleDelete = (serviceData) => {
               onClick = {(event) => {
                 handleToggleNeedService(service)
               }}
-              > {service.make}
+              > 
                 {
                 
                 service.needService ?
