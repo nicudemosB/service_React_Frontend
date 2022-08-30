@@ -74,9 +74,11 @@ const App = () => {
       
         needService: !serviceData.needService
       }
-    ).then(() => {
-      axios.get('http://localhost:3000/service').then((response) => {
-        setService(response.data)
+    )
+    .then(() => {
+      axios.get('http://localhost:3000/service')
+        .then((response) => {
+          setService(response.data)
       })
     })
   }
