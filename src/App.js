@@ -106,7 +106,7 @@ const handleDelete = (serviceData) => {
           {
             service.map((service) => {
               return (
-              <li 
+              <ul 
               key={service._id}
               onClick = {(event) => {
                 handleToggleNeedService(service)
@@ -120,10 +120,15 @@ const handleDelete = (serviceData) => {
                 service.make
                 
                 }
+                {"     "}
+                {service.model}
+                {"     "}
+                {service.year}
+                {"     "}
                 <button onClick={(event) => {
                    handleDelete(service)
                 }}>Delete</button>
-              </li>)
+              </ul>)
             })
           }
         </ul>
