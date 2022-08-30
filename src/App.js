@@ -108,21 +108,21 @@ const handleDelete = (serviceData) => {
               return (
               <li 
               key={service._id}
-              // onClick = {(event) => {
-              //   handleToggleNeedService(service)
-              // }}
+              onClick = {(event) => {
+                handleToggleNeedService(service)
+              }}
               > {service.make}
-                {/* {
+                {
                 
                 service.needService ?
                 <strike>{service.make}</strike>
                 :
                 service.make
                 
-                } */}
-                {/* <button onClick={(event) => {
+                }
+                <button onClick={(event) => {
                    handleDelete(service)
-                }}>Delete</button> */}
+                }}>Delete</button>
               </li>)
             })
           }
