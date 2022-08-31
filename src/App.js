@@ -95,7 +95,7 @@ const handleDelete = (serviceData) => {
     <main className="App">
       <h1>The Car Shop</h1>
       <section>
-        <h2>Register your Vehicle</h2>
+        <h2>Register a Vehicle</h2>
         <form onSubmit = {handleNewListFormSubmit}>
           Make: <input type='text' onChange={handleNewMakeChange} /><br/>
           Model: <input type='text' onChange={handleNewModelChange} /><br/>
