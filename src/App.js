@@ -1,12 +1,15 @@
 import './App.css';
 import {useState, useEffect} from 'react'
 import axios from 'axios'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button } from "reactstrap"
+
 
 const App = () => {
 
   const [newMake, setMake] = useState('')
   const [newModel, setModel] = useState('')
-  const [newServiceChange, setServiceChange] = useState(false)
+  const [newServiceChange, setServiceChange] = useState(true)
   const [newYear, setYear] = useState(1980)
   const [service, setService] = useState([])
 
@@ -79,7 +82,8 @@ const App = () => {
 const handleDelete = (serviceData) => {
   // console.log(serviceData);
   axios.delete(`https://young-anchorage-04692.herokuapp.com/service/${serviceData._id}`).then(() => {
-    axios.get('https://young-anchorage-04692.herokuapp.com/service').then((response) => {
+    axios.get('https://young-anchorage-04692.herokuapp.com/service')
+    .then((response) => {
       setService(response.data)
     })
   })
@@ -89,24 +93,24 @@ const handleDelete = (serviceData) => {
 
   return (
     <main className="App">
-      <h1>Car Maintenance</h1>
+      <h1>The Car Shop</h1>
       <section>
-        <h2>List of vehicles due for service</h2>
+        <h2>Register your Vehicle</h2>
         <form onSubmit = {handleNewListFormSubmit}>
           Make: <input type='text' onChange={handleNewMakeChange} /><br/>
           Model: <input type='text' onChange={handleNewModelChange} /><br/>
           Year: <input type='number' onChange={handleNewYearChange} /><br/>
           Needs Service <input type='checkbox' onChange={handleNewServiceChange} /><br/>
-          <input type='submit' value='Send vehicle for maintenance'></input>
+          <input className='btn btn-warning' type='submit' value='Submit'></input>
         </form>
       </section>
-      <section>
-        <h2>Service</h2>
+      <section><br/>
+        <h2>Vehicle Status</h2>
         <ul>
           {
             service.map((service) => {
               return (
-              <li 
+              <ul 
               key={service._id}
               onClick = {(event) => {
                 handleToggleNeedService(service)
@@ -120,10 +124,15 @@ const handleDelete = (serviceData) => {
                 service.make
                 
                 }
-                <button onClick={(event) => {
+                {"     "}
+                {service.model}
+                {"     "}
+                {service.year}
+                {"     "}
+                <Button color="info" onClick={(event) => {
                    handleDelete(service)
-                }}>Delete</button>
-              </li>)
+                }}>Send to Admin</Button>
+              </ul>)
             })
           }
         </ul>
