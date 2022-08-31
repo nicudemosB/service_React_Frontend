@@ -4,6 +4,7 @@ import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from "reactstrap"
 
+
 const App = () => {
 
   const [newMake, setMake] = useState('')
@@ -92,19 +93,19 @@ const handleDelete = (serviceData) => {
 
   return (
     <main className="App">
-      <h1>Car Maintenance</h1>
+      <h1>The Car Shop</h1>
       <section>
-        <h2>List of vehicles due for service</h2>
+        <h2>Register your Vehicle</h2>
         <form onSubmit = {handleNewListFormSubmit}>
           Make: <input type='text' onChange={handleNewMakeChange} /><br/>
           Model: <input type='text' onChange={handleNewModelChange} /><br/>
           Year: <input type='number' onChange={handleNewYearChange} /><br/>
           Needs Service <input type='checkbox' onChange={handleNewServiceChange} /><br/>
-          <input className='btn btn-warning' type='submit' value='Send vehicle for maintenance'></input>
+          <input className='btn btn-warning' type='submit' value='Submit'></input>
         </form>
       </section>
-      <section>
-        <h2>Service</h2>
+      <section><br/>
+        <h2>Vehicle Status</h2>
         <ul>
           {
             service.map((service) => {
@@ -128,9 +129,9 @@ const handleDelete = (serviceData) => {
                 {"     "}
                 {service.year}
                 {"     "}
-                <Button color="danger" onClick={(event) => {
+                <Button color="info" onClick={(event) => {
                    handleDelete(service)
-                }}>Delete</Button>
+                }}>Send to Admin</Button>
               </ul>)
             })
           }
