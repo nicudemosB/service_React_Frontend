@@ -94,19 +94,21 @@ const handleDelete = (serviceData) => {
   return (
     <main className="App">
       <h1>The Car Shop</h1>
+      <table>
       <section>
-        <h2>Register your Vehicle</h2>
+        <h2>Register a Vehicle</h2>
         <form onSubmit = {handleNewListFormSubmit}>
           Make: <input type='text' onChange={handleNewMakeChange} /><br/>
-          Model: <input type='text' onChange={handleNewModelChange} /><br/>
-          Year: <input type='number' onChange={handleNewYearChange} /><br/>
+          Model: <input className='model' type='text' onChange={handleNewModelChange} /><br/>
+          Year: <input className='year' type='number' onChange={handleNewYearChange} /><br/>
           Needs Service <input type='checkbox' onChange={handleNewServiceChange} /><br/>
           <input className='btn btn-warning' type='submit' value='Submit'></input>
         </form>
       </section>
       <section><br/>
         <h2>Vehicle Status</h2>
-        <ul>
+        
+        <ul className='ul'>
           {
             service.map((service) => {
               return (
@@ -129,7 +131,7 @@ const handleDelete = (serviceData) => {
                 {"     "}
                 {service.year}
                 {"     "}
-                <Button color="info" onClick={(event) => {
+                <Button className='btn' color="info" onClick={(event) => {
                    handleDelete(service)
                 }}>Send to Admin</Button>
               </ul>)
@@ -137,6 +139,7 @@ const handleDelete = (serviceData) => {
           }
         </ul>
       </section>
+      </table>
     </main>
   );
 }
