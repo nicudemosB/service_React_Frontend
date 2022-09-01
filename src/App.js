@@ -92,8 +92,8 @@ const handleDelete = (serviceData) => {
 //___________________________________________________________________
 
   return (
-    <main className="App">
-      <h1>The Car Shop</h1>
+    <main className=''>
+      <h1>Car Maintenance</h1>
       <section>
         <h2>Register your Vehicle</h2>
         <form onSubmit = {handleNewListFormSubmit}>
