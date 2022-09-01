@@ -1,21 +1,18 @@
-.App {
-  
-  background-size: cover;
-  background-repeat: repeat;
+.App { 
   text-align: center;
   font-family: 'Prompt', sans-serif;
-  font-size: 1.2em;
+  font-size: 1.4em;
   color: white;
   height: 100vh;
 }
 body {
-  background: url(/public/images/check_engine.jpg) no-repeat center fixed;
-  
-}
-h2 {
-  font-family: 'Bebas Neue', cursive;
+  background: url(/public/images/check_engine.jpg);
+  background-size: cover;
+  background-repeat: repeat;
 }
 h1 {
   font-family: 'Bebas Neue', cursive;
 }
-
+h2 {
+  font-family: 'Bebas Neue', cursive;
+}

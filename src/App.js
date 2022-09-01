@@ -4,14 +4,13 @@ import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from "reactstrap"
 
-
 const App = () => {
 
   const [newMake, setMake] = useState('')
   const [newModel, setModel] = useState('')
-  const [newServiceChange, setServiceChange] = useState(true)
-  const [newYear, setYear] = useState(1980)
+  const [newYear, setYear] = useState('')
   const [service, setService] = useState([])
+  const [newServiceChange, setServiceChange] = useState(true)
 
 //___________________________________________________________________
 
@@ -65,7 +64,8 @@ const App = () => {
     axios.put(`https://young-anchorage-04692.herokuapp.com/service/${serviceData._id}`,
       {
         make: serviceData.make,
-      
+        model: serviceData.model,
+        year: serviceData.year,
         needService: !serviceData.needService
       }
     )
@@ -95,47 +95,53 @@ const handleDelete = (serviceData) => {
     <main className="App">
       <h1>The Car Shop</h1>
       <section>
-        <h2>Register your Vehicle</h2>
+        <h2>Register New Vehicle</h2>
         <form onSubmit = {handleNewListFormSubmit}>
           Make: <input type='text' onChange={handleNewMakeChange} /><br/>
           Model: <input type='text' onChange={handleNewModelChange} /><br/>
-          Year: <input type='number' onChange={handleNewYearChange} /><br/>
-          Needs Service <input type='checkbox' onChange={handleNewServiceChange} /><br/>
-          <input className='btn btn-warning' type='submit' value='Submit'></input>
+          Year: <input type='number' defaultValue="2000" onChange={handleNewYearChange} /><br/>
+          Needs Service <input type='checkbox' defaultChecked={true} onChange={handleNewServiceChange} /><br/>
+          <input className='btn btn-warning' type='submit' value='Add to List'></input>
         </form>
       </section>
       <section><br/>
-        <h2>Vehicle Status</h2>
-        <ul>
+        <h2>Vehicle Maintenance List:</h2>
+        <div>
           {
             service.map((service) => {
               return (
-              <ul 
+              <div 
               key={service._id}
+              style={{border:'1px solid white'}}
               onClick = {(event) => {
                 handleToggleNeedService(service)
               }}
               > 
                 {
-                
                 service.needService ?
-                <strike>{service.make}</strike>
-                :
                 service.make
-                
+                :<strike>{service.make}</strike>
                 }
                 {"     "}
-                {service.model}
+                {
+                service.needService ?
+                service.model
+                :<strike>{service.model}</strike>
+                }
                 {"     "}
-                {service.year}
+                {
+                service.needService ?
+                service.year
+                :<strike>{service.year}</strike>
+                }
                 {"     "}
                 <Button color="info" onClick={(event) => {
-                   handleDelete(service)
+                  handleDelete(service)
                 }}>Send to Admin</Button>
-              </ul>)
+              </div>)
             })
           }
-        </ul>
+        </div>
       </section>
     </main>
   );
