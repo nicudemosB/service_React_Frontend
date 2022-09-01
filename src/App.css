@@ -10,6 +10,7 @@
 }
 body {
   background: url(/public/images/check_engine.jpg) no-repeat center fixed;
+  background-color: black;
   
 }
 h2 {
@@ -19,3 +20,23 @@ h1 {
   font-family: 'Bebas Neue', cursive;
 }
 
+table {
+  display: flex;
+  border: solid blue;
+  flex-direction: column;
+}
+.model{
+  margin-right: 6px; 
+}
+
+.year{
+  margin-left:10px;
+}
+
+.ul{
+  display: flex;
+  flex-basis:0;
+  flex-shrink: 1;
+  flex-wrap: wrap;
+  text-align: center;
+}
