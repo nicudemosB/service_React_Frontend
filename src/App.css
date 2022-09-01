@@ -29,3 +29,11 @@ h1 {
 h3 {
   font-family: 'Bebas Neue', cursive;
 }
+
+.model { 
+  margin-right:9px;
+}
+
+.year {
+  margin-left: 10px;
+}

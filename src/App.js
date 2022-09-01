@@ -129,8 +129,8 @@ const handleDelete = (serviceData) => {
           <h3>Register New Vehicle</h3>
           <form onSubmit = {handleNewListFormSubmit}>
             Make: <input type='text' onChange={handleNewMakeChange} /><br/>
-            Model: <input type='text' onChange={handleNewModelChange} /><br/>
-            Year: <input type='number' defaultValue="2000" onChange={handleNewYearChange} /><br/>
+            Model: <input className='model' type='text' onChange={handleNewModelChange} /><br/>
+            Year: <input className='year' type='number' defaultValue="2000" onChange={handleNewYearChange} /><br/>
             Needs Service <input type='checkbox' defaultChecked={true} onChange={handleNewServiceChange} /><br/>
             <input className='btn btn-warning' type='submit' value='Add to List'></input>
           </form><br/>
