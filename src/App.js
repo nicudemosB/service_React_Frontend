@@ -1,20 +1,25 @@
 import './App.css';
 import {useState, useEffect} from 'react'
 import axios from 'axios'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button } from "reactstrap"
+
 
 const App = () => {
 
   const [newMake, setMake] = useState('')
   const [newModel, setModel] = useState('')
-  const [newServiceChange, setServiceChange] = useState(false)
+  const [newServiceChange, setServiceChange] = useState(true)
   const [newYear, setYear] = useState(1980)
+  const [service, setService] = useState([])
+
+//___________________________________________________________________
 
   const handleNewMakeChange = (event) => {
     // console.log(event.target.value);
     setMake(event.target.value)
   }
 
-  
   const handleNewModelChange = (event) => {
     // console.log(event.target.value);
     setModel(event.target.value)
@@ -25,33 +30,112 @@ const App = () => {
   }
   
   const handleNewServiceChange = (event) => {
-    console.log(event.target.checked);
+    // console.log(event.target.checked);
+    setServiceChange(event.target.checked)
   }
 
-  const handleNewListFormSubmit = (event) => {
+  //___________________________________________________________________
+
+  useEffect(() => {
+    axios.get('https://young-anchorage-04692.herokuapp.com/service').then((response) => {
+      setService(response.data)
+    })
+  }, [])
+
+    const handleNewListFormSubmit = (event) => {
     event.preventDefault()
     // console.log(newMake);
     // console.log(newServiceChange);
-    axios.post('http://localhost:3000/service',
+    axios.post('https://young-anchorage-04692.herokuapp.com/service',
     {
       make: newMake,
       model: newModel,
-      year: newYear
-      
+      year: newYear,
+      needService: newServiceChange
+    }
+    ).then(() => {
+      axios.get('https://young-anchorage-04692.herokuapp.com/service').then((response) => {
+        setService(response.data)
+      })
     })
   }
+
+  const handleToggleNeedService = (serviceData) => {
+    // console.log(serviceData);
+    axios.put(`https://young-anchorage-04692.herokuapp.com/service/${serviceData._id}`,
+      {
+        make: serviceData.make,
+      
+        needService: !serviceData.needService
+      }
+    )
+    .then(() => {
+      axios.get('https://young-anchorage-04692.herokuapp.com/service')
+        .then((response) => {
+          setService(response.data)
+      })
+    })
+  }
+
+//___________________________________________________________________
+
+const handleDelete = (serviceData) => {
+  // console.log(serviceData);
+  axios.delete(`https://young-anchorage-04692.herokuapp.com/service/${serviceData._id}`).then(() => {
+    axios.get('https://young-anchorage-04692.herokuapp.com/service')
+    .then((response) => {
+      setService(response.data)
+    })
+  })
+}
+
+//___________________________________________________________________
+
   return (
     <main className=''>
       <h1>Car Maintenance</h1>
       <section>
-        <h2>List of vehicles due for service</h2>
+        <h2>Register your Vehicle</h2>
         <form onSubmit = {handleNewListFormSubmit}>
           Make: <input type='text' onChange={handleNewMakeChange} /><br/>
           Model: <input type='text' onChange={handleNewModelChange} /><br/>
           Year: <input type='number' onChange={handleNewYearChange} /><br/>
           Needs Service <input type='checkbox' onChange={handleNewServiceChange} /><br/>
-          <input type='submit' value='Send vehicle for maintenance'></input>
+          <input className='btn btn-warning' type='submit' value='Submit'></input>
         </form>
+      </section>
+      <section><br/>
+        <h2>Vehicle Status</h2>
+        <ul>
+          {
+            service.map((service) => {
+              return (
+              <ul 
+              key={service._id}
+              onClick = {(event) => {
+                handleToggleNeedService(service)
+              }}
+              > 
+                {
+                
+                service.needService ?
+                <strike>{service.make}</strike>
+                :
+                service.make
+                
+                }
+                {"     "}
+                {service.model}
+                {"     "}
+                {service.year}
+                {"     "}
+                <Button color="info" onClick={(event) => {
+                   handleDelete(service)
+                }}>Send to Admin</Button>
+              </ul>)
+            })
+          }
+        </ul>
       </section>
     </main>
   );
