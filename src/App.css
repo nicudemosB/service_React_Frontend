@@ -1,21 +1,31 @@
-.App {
-  
-  background-size: cover;
-  background-repeat: repeat;
+.App { 
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
   text-align: center;
   font-family: 'Prompt', sans-serif;
-  font-size: 1.2em;
+  font-size: 1.4em;
   color: white;
   height: 100vh;
+  max-width: 80vw;
+  height: 100vh;
+  margin: auto;
 }
 body {
-  background: url(/public/images/check_engine.jpg) no-repeat center fixed;
-  
+  background: url(/public/images/check_engine.jpg);
+  background-size: cover;
+  background-repeat: repeat;
 }
-h2 {
-  font-family: 'Bebas Neue', cursive;
+.Tech{
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 h1 {
   font-family: 'Bebas Neue', cursive;
+  width: 50vw;
 }
-
+h3 {
+  font-family: 'Bebas Neue', cursive;
+}

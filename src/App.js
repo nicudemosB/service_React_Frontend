@@ -1,17 +1,26 @@
 import './App.css';
-import {useState, useEffect} from 'react'
-import axios from 'axios'
+import {useState, useEffect} from 'react';
+import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button } from "reactstrap"
-
+import { 
+  Button,
+  Navbar,
+  NavItem,
+  NavbarToggler,
+  Collapse,
+  NavLink,
+  Nav,
+  NavbarBrand
+} from "reactstrap";
 
 const App = () => {
 
-  const [newMake, setMake] = useState('')
-  const [newModel, setModel] = useState('')
-  const [newServiceChange, setServiceChange] = useState(true)
-  const [newYear, setYear] = useState(1980)
-  const [service, setService] = useState([])
+  const [newMake, setMake] = useState('');
+  const [newModel, setModel] = useState('');
+  const [newYear, setYear] = useState('');
+  const [service, setService] = useState([]);
+  const [newServiceChange, setServiceChange] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
 //___________________________________________________________________
 
@@ -65,7 +74,8 @@ const App = () => {
     axios.put(`https://young-anchorage-04692.herokuapp.com/service/${serviceData._id}`,
       {
         make: serviceData.make,
-      
+        model: serviceData.model,
+        year: serviceData.year,
         needService: !serviceData.needService
       }
     )
@@ -93,50 +103,78 @@ const handleDelete = (serviceData) => {
 
   return (
     <main className="App">
-      <h1>The Car Shop</h1>
-      <section>
-        <h2>Register your Vehicle</h2>
-        <form onSubmit = {handleNewListFormSubmit}>
-          Make: <input type='text' onChange={handleNewMakeChange} /><br/>
-          Model: <input type='text' onChange={handleNewModelChange} /><br/>
-          Year: <input type='number' onChange={handleNewYearChange} /><br/>
-          Needs Service <input type='checkbox' onChange={handleNewServiceChange} /><br/>
-          <input className='btn btn-warning' type='submit' value='Submit'></input>
-        </form>
-      </section>
-      <section><br/>
-        <h2>Vehicle Status</h2>
-        <ul>
+            <div className="Tech" style={{display: 'block', width: 300, padding: 10}}>
+            <h5></h5>
+            <Navbar color="light" light >
+                <NavbarBrand href="/">Technician</NavbarBrand>
+                <NavbarToggler onClick={() => { setIsOpen(!isOpen) }} />
+                <Collapse isOpen={isOpen} navbar>
+                    <Nav className="mr-auto" navbar>
+                        <NavItem>
+                            <NavLink href="https://safe-refuge-01136.herokuapp.com/">Login</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink href="http://google.com">Home</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink href="http://www.mitchell-g.com">Admin</NavLink>
+                        </NavItem>
+                    </Nav>
+                </Collapse>
+            </Navbar>
+            </div >
+      <div>
+        <section>
+          <h1 className="h1">Vehicle Repair Shop</h1>
+          <h3>Register New Vehicle</h3>
+          <form onSubmit = {handleNewListFormSubmit}>
+            Make: <input type='text' onChange={handleNewMakeChange} /><br/>
+            Model: <input type='text' onChange={handleNewModelChange} /><br/>
+            Year: <input type='number' defaultValue="2000" onChange={handleNewYearChange} /><br/>
+            Needs Service <input type='checkbox' defaultChecked={true} onChange={handleNewServiceChange} /><br/>
+            <input className='btn btn-warning' type='submit' value='Add to List'></input>
+          </form><br/>
+        <h3>Vehicle Maintenance List:</h3>
+        <div>
           {
             service.map((service) => {
               return (
-              <ul 
+              <div 
               key={service._id}
+              style={{border:'1px solid white'}}
               onClick = {(event) => {
                 handleToggleNeedService(service)
               }}
               > 
                 {
-                
                 service.needService ?
-                <strike>{service.make}</strike>
-                :
                 service.make
-                
+                :<strike>{service.make}</strike>
                 }
                 {"     "}
-                {service.model}
+                {
+                service.needService ?
+                service.model
+                :<strike>{service.model}</strike>
+                }
                 {"     "}
-                {service.year}
+                {
+                service.needService ?
+                service.year
+                :<strike>{service.year}</strike>
+                }
                 {"     "}
                 <Button color="info" onClick={(event) => {
-                   handleDelete(service)
+                  // alert(`${service.make} ${service.model} ${service.year}`+
+                  // " Repaired Reported to Admin.")
+                  handleDelete(service)
                 }}>Send to Admin</Button>
-              </ul>)
+              </div>)
             })
           }
-        </ul>
-      </section>
+        </div>
+        </section>
+      </div>
     </main>
   );
 }
