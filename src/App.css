@@ -21,11 +21,9 @@ h1 {
   font-family: 'Bebas Neue', cursive;
 }
 
-<<<<<<< HEAD
 h1 { 
   margin: 0px
 }
-=======
 table {
   display: flex;
   border: solid blue;
@@ -46,4 +44,3 @@ table {
   flex-wrap: wrap;
   text-align: center;
 }
->>>>>>> 35c700690e0e3b76db233c139b1221bc94de0d6e
