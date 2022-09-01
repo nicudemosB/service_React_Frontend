@@ -1,18 +1,33 @@
 .App { 
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  /* align-items: center; */
+  justify-content: center;
   text-align: center;
   font-family: 'Prompt', sans-serif;
   font-size: 1.4em;
   color: white;
   height: 100vh;
+  max-width: 100%;
+  width: 100vw;
+  height: 100vh;
+  margin: auto;
 }
 body {
   background: url(/public/images/check_engine.jpg);
   background-size: cover;
   background-repeat: repeat;
 }
+.Tech{
+  /* float: left; */
+  position: fixed;
+  top: 0;
+  left: 0;
+}
 h1 {
   font-family: 'Bebas Neue', cursive;
 }
-h2 {
+h3 {
   font-family: 'Bebas Neue', cursive;
 }
