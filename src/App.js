@@ -117,7 +117,10 @@ const handleDelete = (serviceData) => {
                             <NavLink href="http://google.com">Home</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink href="http://www.mitchell-g.com">Admin</NavLink>
+                            <NavLink href="http://www.mitchell-g.com">Admin 1</NavLink>
+                        </NavItem>
+                        <NavItem>
+                          <NavLink href="https://billys-portfolio.netlify.app">Admin 2</NavLink>
                         </NavItem>
                     </Nav>
                 </Collapse>
@@ -164,11 +167,13 @@ const handleDelete = (serviceData) => {
                 :<strike>{service.year}</strike>
                 }
                 {"     "}
-                <Button color="info" onClick={(event) => {
+                <div>
+                <Button color="info" className='text-right' onClick={(event) => {
                   // alert(`${service.make} ${service.model} ${service.year}`+
                   // " Repaired Reported to Admin.")
                   handleDelete(service)
                 }}>Send to Admin</Button>
+                </div>
               </div>)
             })
           }
@@ -180,3 +185,5 @@ const handleDelete = (serviceData) => {
 }
 
 export default App;
+  
+          
